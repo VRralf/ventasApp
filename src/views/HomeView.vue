@@ -32,7 +32,7 @@ function atender(barra) {
 </script>
 
 <template>
-  <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
+ <!-- <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">{{ usuario }}</a>
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01"
@@ -59,16 +59,38 @@ function atender(barra) {
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
-        </ul>
-        <form role="search">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        </form>
+        </ul>       
       </div>
     </div>
-  </nav>
-  <div class="container">
-    <div class="d-flex flex-column p-3 gap-1">
-      <button @click="atender(barra)" class="btn btn-primary" v-for="barra of barras">{{ barra }}</button>
+  </nav>  -->
+  <div class="container py-5 h-100">
+    <div class="d-flex justify-content-center flex-column p-3 gap-2" >
+      <h2 style="text-align: center;">Selecciona la barra a atender</h2>
+      <button @click="atender(barra)" class="btn  fw-bold mb-2 neon-button " v-for= "barra of barras" style=" padding: 20px 30px;">{{ barra }}</button>
     </div>
   </div>
 </template>
+
+<style scoped>
+.container{
+  background-color: #f8f2fc; 
+  left: 0;
+  min-height: 100vh;
+  min-width: 100vw;  
+} 
+.neon-button {  
+ background-color: #391952;
+  color: aliceblue;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 20px; 
+ 
+}
+
+
+
+
+
+ 
+</style>
