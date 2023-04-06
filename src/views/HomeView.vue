@@ -1,23 +1,16 @@
 <script setup>
 import { ref } from 'vue';
 import Swal from 'sweetalert2';
+import { useUserStore } from '../store/user';
+import { useBarStore } from '../store/bars'
 
-const usuario = ref('Fernanda')
-const barras = ref([
-  'BARRA 1',
-  'BARRA 2',
-  'BARRA 3',
-  'BARRA 4',
-  'BARRA 5',
-  'BARRA 6',
-  'BARRA 7',
-  'BARRA 8',
-])
+const userStore = useUserStore()
+const barStore = useBarStore()
 
 function atender(barra) {
   Swal.fire({
     title: 'Seleccion:',
-    text: 'Atender ' + barra,
+    text: 'Atender ' + barra.name,
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -25,6 +18,7 @@ function atender(barra) {
     confirmButtonText: 'Si, atender!'
   }).then((result) => {
     if (result.isConfirmed) {
+      barStore.barSelect(barra)
       window.location.href = '/ventas'
     }
   })
@@ -34,7 +28,7 @@ function atender(barra) {
 <template>
  <!-- <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">{{ usuario }}</a>
+      <a class="navbar-brand" href="#">{{ userStore.user.name }}</a>
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01"
         aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -66,7 +60,7 @@ function atender(barra) {
   <div class="container py-5 h-100">
     <div class="d-flex justify-content-center flex-column p-3 gap-2" >
       <h2 style="text-align: center;">Selecciona la barra a atender</h2>
-      <button @click="atender(barra)" class="btn  fw-bold mb-2 neon-button " v-for= "barra of barras" style=" padding: 20px 30px;">{{ barra }}</button>
+      <button @click="atender(barra)" class="btn  fw-bold mb-2 neon-button " v-for= "barra of barStore.bars" style=" padding: 20px 30px;">{{ barra.name }}</button>
     </div>
   </div>
 </template>

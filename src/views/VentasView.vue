@@ -1,11 +1,13 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Swal from 'sweetalert2';
-import { computed } from '@vue/reactivity';
+import { useCategoryStore } from '../store/categories'
+import { useBarStore } from '../store/bars';
 
-
+const barStore = useBarStore()
+const categoryStore = useCategoryStore()
 const estado = ref('categorias')
-const numeroBarra = ref('2')
+const indiceCategoria = ref(0)
 const pedido = ref([
     /* {
         name: 'Producto',
@@ -32,7 +34,7 @@ const total = computed(() => {
     }, 0)
 })
 
-const categorias = ref([
+/* const categorias = ref([
     'CATEGORIA 1',
     'CATEGORIA 2',
     'CATEGORIA 3',
@@ -96,10 +98,11 @@ const productos = ref([
         price: 300,
         category: 'CATEGORIA 2'
     },
-])
+]) */
 
 const productosF = ref([])
 const productoPedido = ref({
+    id:0,
     name: '',
     price: 0,
     amount: 0,
@@ -119,9 +122,10 @@ const productoPedido = ref({
     }
 })
 
-function mostrarProductos(categoria) {
+function mostrarProductos(index){
+    indiceCategoria.value = index
     estado.value = 'productos'
-    productosF.value = productos.value.filter(prod => prod.category == categoria)
+    /* productosF.value = productos.value.filter(prod => prod.category == categoria) */
 }
 
 function mostrarProducto(producto) {
@@ -172,7 +176,7 @@ function volver() {
     <div class="ventana ventas py-5">
         <header>
             <h1 style="text-align: center;">Ventas</h1>
-            <h3>Barra {{ numeroBarra }}</h3>
+            <h3>Barra {{ barStore.bar }}</h3>
         </header>
         <main>
             <button @click="volver" id="volver" class=" neon-button">Volver</button>
@@ -186,18 +190,15 @@ function volver() {
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                     </svg>
-                </button>
-                <!-- <button type="button" class="btn btn-primary">
-                            <i class="fas fa-search"></i>
-                        </button> -->
+                </button>   
             </div>
             <div class="d-flex justify-content-around flex-wrap w-100" v-if="estado == 'categorias'" id="categorias">
-                <button class=" btn-category " @click="mostrarProductos(categoria)" v-for="categoria of categorias">{{
-                    categoria }}</button>
-                <button class=" btn-category " v-if="categorias.length % 2 == 1">😎</button>
+                <button class=" btn-category " @click="mostrarProductos(indice)" v-for="(categoria,indice) of categoryStore.categories">{{
+                    categoria.name }}</button>
+                <button class=" btn-category " v-if="categoryStore.categories.length % 2 == 1"><i class="bi bi-search"></i></button>
             </div>
             <div id="productos" v-if="estado == 'productos'" class="d-flex justify-content-around flex-wrap w-100">
-                <div class="card mb-3 " style="max-width: 540px;" v-for="producto of productosF">
+                <div class="card mb-3 " style="max-width: 540px;" v-for="producto in categoryStore.categories[indiceCategoria].products">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="https://fotos.perfil.com/2019/06/24/4-recetas-de-tragos-para-invierno-744958.jpg"
@@ -208,13 +209,13 @@ function volver() {
                                 <h5 class="card-title" style="text-align: center;">{{ producto.name }}</h5>
                                 <button @click="mostrarProducto(producto)"
                                     style="background-color:#462361 ; color: #ba80e6;border-radius:20px ;">Comprar</button>
-                                <button v-if="productos.length % 2 == 1">😎</button>
-
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <!-- <button v-if="categoryStore.categories[indiceCategoria].products.length % 2 == 1">😎</button> -->
             <div v-if="estado == 'venta'" id="venta" class="card mb-3 mt-5" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
