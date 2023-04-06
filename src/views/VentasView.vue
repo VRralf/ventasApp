@@ -1,10 +1,13 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Swal from 'sweetalert2';
-import { computed } from '@vue/reactivity';
+import { useCategoryStore } from '../store/categories'
+import { useBarStore } from '../store/bars';
 
+const barStore = useBarStore()
+const categoryStore = useCategoryStore()
 const estado = ref('categorias')
-const numeroBarra = ref('2')
+const indiceCategoria = ref(0)
 const pedido = ref([
     /* {
         name: 'Producto',
@@ -31,7 +34,7 @@ const total = computed(()=>{
     },0)
 })
 
-const categorias = ref([
+/* const categorias = ref([
     'CATEGORIA 1',
     'CATEGORIA 2',
     'CATEGORIA 3',
@@ -95,10 +98,11 @@ const productos = ref([
         price: 300,
         category: 'CATEGORIA 2'
     },
-])
+]) */
 
 const productosF = ref([])
 const productoPedido = ref({
+    id:0,
     name: '',
     price: 0,
     amount: 0,
@@ -118,9 +122,10 @@ const productoPedido = ref({
     }
 })
 
-function mostrarProductos(categoria){
+function mostrarProductos(index){
+    indiceCategoria.value = index
     estado.value = 'productos'
-    productosF.value = productos.value.filter(prod => prod.category == categoria)
+    /* productosF.value = productos.value.filter(prod => prod.category == categoria) */
 }
 
 function mostrarProducto(producto){
@@ -171,25 +176,27 @@ function volver() {
     <div class="ventana ventas">
         <header>
             <h1>Ventas</h1>
-            <p>Barra {{ numeroBarra }}</p>
+            <p>{{ barStore.bar }}</p>
         </header>
         <main>
             <button @click="volver" id="volver">Volver</button>
             <div v-if="estado == 'categorias'" id="categorias">
-                <button @click="mostrarProductos(categoria)" v-for="categoria of categorias">{{ categoria }}</button>
-                <button v-if="categorias.length % 2 == 1">😎</button>
+                <button @click="mostrarProductos(index)" v-for="(categoria, index) in categoryStore.categories">{{ categoria.name }}</button>
+                <button v-if="categoryStore.categories.length % 2 == 1">😎</button>
             </div>
             <div id="productos" v-if="estado == 'productos'">
-                <button @click="mostrarProducto(producto)" v-for="producto of productosF">{{ producto.name }}</button>
-                <button v-if="productos.length % 2 == 1">😎</button>
+                <button @click="mostrarProducto(producto)" v-for="producto of categoryStore.categories[indiceCategoria].products">{{ producto.name }}</button>
+                <button v-if="categoryStore.categories[indiceCategoria].products.length % 2 == 1">😎</button>
             </div>
             <div v-if="estado == 'venta'" id="venta">
                 <h2>Producto: {{ productoPedido.name }}</h2>
                 <p>Precio: ${{ productoPedido.price }}</p>
                 <p>Cantidad: {{ productoPedido.amount }}</p>
-                <button @click="productoPedido.plus" class="btn btn-secondary">+</button>
-                <button @click="productoPedido.minus" class="btn btn-secondary">-</button>
-                <button :disabled="!productoPedido.amount" @click="agregarProducto" class="btn btn-secondary">Agregar</button>
+                <div class="d-flex gap-1">
+                    <button @click="productoPedido.plus" class="btn btn-secondary">+</button>
+                    <button @click="productoPedido.minus" class="btn btn-secondary">-</button>
+                    <button :disabled="!productoPedido.amount" @click="agregarProducto" class="btn btn-secondary">Agregar</button>
+                </div>
             </div>
         </main>
         <footer>
