@@ -18,7 +18,7 @@ function atender(barra) {
     confirmButtonText: 'Si, atender!'
   }).then((result) => {
     if (result.isConfirmed) {
-      barStore.barSelect(barra)
+      //barStore.barSelect(barra)
       window.location.href = '/ventas'
     }
   })
