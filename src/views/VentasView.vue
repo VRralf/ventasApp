@@ -292,6 +292,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     min-width: 100vw;
     /* flex-direction: column;
     justify-content: center;
