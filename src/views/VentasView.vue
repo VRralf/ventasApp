@@ -173,18 +173,17 @@ function volver() {
 </script>
 
 <template>
-    <div class="ventana ventas py-5">
+    <div class="ventana ventas ">
         <header>
             <h1 style="text-align: center;">Ventas</h1>
             <h3>Barra {{ barStore.bar }}</h3>
         </header>
         <main>
             
-                <button @click="volver" id="volver" class=" neon-button">Volver</button>
-            <div class="input-group d-flex justify-content-center ">
+                <button @click="volver" id="volver" class=" neon-button d-flex justify-content-center">Volver</button>
+            <div class="input-group d-flex justify-content-center mt-1">
                 <div class="form-outline">
-                    <input type="search" id="form1" class="form-control"  placeholder="Buscar..."/>
-                
+                    <input type="search" id="form1" class="form-control"  placeholder="Buscar..."/>               
                 
             </div>
                
@@ -235,7 +234,7 @@ function volver() {
                 </div>
             </div>
             <button class=" neon-button" :disabled="!productoPedido.amount" @click="agregarProducto"
-                                style="background-color:#D95D39 ;color: aliceblue ; font-size: 18px;">Agregar</button>
+                                >Agregar</button>
             <!--  <div v-if="estado == 'venta'" id="venta">
                     <h2>Producto: {{ productoPedido.name }}</h2>
                     <p>Precio: ${{ productoPedido.price }}</p>
@@ -257,33 +256,31 @@ function volver() {
 <style scoped>
 .ventas {
     background-color: #f8f2fc;
-    min-height: 100vh;
+   min-height: 100vh;
     min-width: 100vw;
 }
 
 header {
-    background-color:#f5eaeab5;
+    background-color:#ffac00;
     color: #0E1428;
     min-height: 5vh;
     padding: 0.5rem;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    /* position: sticky;
-    top: 0;  */
+    width: 100vw;  
+
 }
 
-.neon-button {
-    background: rgb(239,83,86);
-    background: linear-gradient(0deg, rgba(239,83,86,1) 0%, rgba(241,143,145,1) 100%);
+.neon-button {    
+    background: linear-gradient(0deg,#f8a476 0%,#f4b999  100%);
     color: #fff;
-    margin-top: 4rem;
+    margin-top: 1rem;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 20px;
     height: 3rem;
-    width: 100%;   
+    width: 70%; 
+    
+     
 }
 
 /* #volver {
@@ -293,12 +290,14 @@ header {
  */
 main {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     min-width: 100vw;
     /* flex-direction: column;
     justify-content: center;
     align-items: center; */
     flex-wrap: wrap;
-    padding-bottom: 5vh;
+    /* padding-bottom: 8vh; */
 
 }
 
@@ -310,7 +309,7 @@ main {
     font-weight: bold;
     text-shadow: black 1px 0 10px;
     height: 7rem;
-    width: 48.5%;
+    width: 48%;
     margin: .5%;
     border: none;
     
@@ -346,7 +345,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100vw;
-    background-color:#f5eaeab5;
+    background-color:#ffac00;
     color: #0E1428;
     min-height: 5vh;
     padding: 0.5rem;
