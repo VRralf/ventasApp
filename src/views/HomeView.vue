@@ -3,9 +3,12 @@ import { ref } from 'vue';
 import Swal from 'sweetalert2';
 import { useUserStore } from '../store/user';
 import { useBarStore } from '../store/bars'
+import { useRouter } from 'vue-router'
+
 
 const userStore = useUserStore()
 const barStore = useBarStore()
+const router = useRouter()
 
 function atender(barra) {
   Swal.fire({
@@ -19,7 +22,7 @@ function atender(barra) {
   }).then((result) => {
     if (result.isConfirmed) {
       barStore.barSelect(barra)
-      window.location.href = '/ventas'
+      router.push('/ventas')
     }
   })
 }

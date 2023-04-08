@@ -1,7 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
-export const useBarStore = defineStore("bars", {
+/* export const useBarStore = defineStore("bars", {
     state: () => ({
         bar: null,
         bars:[
@@ -25,10 +25,10 @@ export const useBarStore = defineStore("bars", {
     getters: ()=>{
         
     }
-})
-/* export const useBarStore = defineStore("bars", ()=>{
+}) */
+export const useBarStore = defineStore("bars", ()=>{
 
-    const bar = ref('')
+    const bar = ref(null)
 
     const bars = ref([
         {
@@ -45,10 +45,8 @@ export const useBarStore = defineStore("bars", {
         },
     ])
 
-    const barSelect = (bar) =>{
-        console.log(bar);
-        bar.value = bar.name
-        console.log(bar.value);
+    const barSelect = (barS) =>{
+        bar.value = barS
     }
 
     return {
@@ -56,4 +54,4 @@ export const useBarStore = defineStore("bars", {
         bars,
         barSelect
     }
-}) */
+})

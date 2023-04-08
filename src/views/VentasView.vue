@@ -176,7 +176,7 @@ function volver() {
     <div class="ventana ventas py-5">
         <header>
             <h1 style="text-align: center;">Ventas</h1>
-            <h3>Barra {{ barStore.bar }}</h3>
+            <h3>{{ barStore.bar.name }}</h3>
         </header>
         <main>
             <button @click="volver" id="volver" class=" neon-button">Volver</button>
