@@ -32,6 +32,7 @@ function atender(barra) {
 <template>
   <div class="container py-5 h-100">
     <div class="d-flex justify-content-center flex-column p-3 gap-2" >
+      <h1>Bienvenido {{ userStore.user.name }}</h1>
       <h2 style="text-align: center;">Selecciona la barra a atender</h2>
       <button @click="atender(barra)" class="btn  fw-bold mb-2 neon-button " v-for= "barra of barStore.bars" style=" padding: 20px 30px;">{{ barra.name }}</button>
     </div>

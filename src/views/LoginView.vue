@@ -23,8 +23,8 @@
                                     <label class="form-label" for="typePasswordX">Contraseña</label>
                                 </div>
 
-                                <button @click="login"  class="btn btn-outline-light btn-lg px-5"
-                                    type="submit">Login</button>                              
+                                <button @click="login" class="btn btn-outline-light btn-lg px-5"
+                                    type="submit">Login</button>
 
                             </div>
 
@@ -34,45 +34,48 @@
             </div>
         </div>
     </section>
-  
- 
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import Swal from 'sweetalert2'
+import { useUserStore } from '../store/user';
+import { useRouter } from 'vue-router'
 
-
-
+const router = useRouter()
+const userStore = useUserStore()
 const usuario = ref('')
 const password = ref('')
 
 
 function login() {
-    if (usuario.value == 'admin' && password.value == 'admin') {
-        window.location.href = '/home'
-    } else{
+    if(!usuario.value || !password.value){
         mostrarSweetAlert()
+        return
     }
+    userStore.login({ name: usuario, password: password })
+    router.push('/home')
+
+
 
 }
 function mostrarSweetAlert() {
     Swal.fire({
-      title: 'Ingreso',
-      text: 'Ahí lo tenes al pelotudo!',
-      icon: 'warning',
-      confirmButtonText: 'Aceptar'
+        title: 'Ingreso',
+        text: 'Ahí lo tenes al pelotudo!',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
     });
-  }
+}
 
 
 </script>
 <style>
-.container{
-    background-color: #f8f2fc; 
-  left: 0;
-  min-height: 100vh;
-  min-width: 100vw;
+.container {
+    background-color: #f8f2fc;
+    left: 0;
+    min-height: 100vh;
+    min-width: 100vw;
 }
 </style>
 

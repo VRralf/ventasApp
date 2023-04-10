@@ -1,14 +1,12 @@
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", ()=>{
-    const user = ref({
-        id: 1,
-        name: 'Fernanda'
-    })
+    const user = ref(null)
 
-    const login = ()=>{
-
+    const login = (userLogin)=>{
+        user.value = userLogin
+        localStorage.setItem('user',JSON.stringify(user))
     }
 
     return {

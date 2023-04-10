@@ -28,6 +28,56 @@ export const useCategoryStore = defineStore("category",()=>{
                 },
             ]
         },
+        {
+            id: 2,
+            name: 'Gaseosas',
+            owner: 'bar1',
+            products:[
+                {
+                    id:1,
+                    name: 'Coca Cola',
+                    price: 100,
+                    stock: 8,
+                },
+                {
+                    id:2,
+                    name: 'Fanta',
+                    price: 200,
+                    stock: 10,
+                },
+                {
+                    id:3,
+                    name: 'Sprite',
+                    price: 300,
+                    stock: 5,
+                },
+            ]
+        },
+        {
+            id: 3,
+            name: 'Tragos',
+            owner: 'bar1',
+            products:[
+                {
+                    id:1,
+                    name: 'Margarita',
+                    price: 100,
+                    stock: 8,
+                },
+                {
+                    id:2,
+                    name: 'Semen de pitufo',
+                    price: 200,
+                    stock: 10,
+                },
+                {
+                    id:3,
+                    name: 'Fernet',
+                    price: 300,
+                    stock: 5,
+                },
+            ]
+        },
     ])
 
     return {
