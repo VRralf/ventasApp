@@ -183,12 +183,12 @@ function volver() {
                 <button @click="volver" id="volver" class=" neon-button d-flex justify-content-center">Volver</button>
             <div class="input-group d-flex justify-content-center mt-1">
                 <div class="form-outline">
-                    <input type="search" id="form1" class="form-control"  placeholder="Buscar..."/>               
+                    <input type="search" id="form1" class="form-control"  placeholder="Buscar..."/>           
                 
             </div>
                
             </div>
-            <div class="d-flex flex-wrap w-100" v-if="estado == 'categorias'" id="categorias">
+            <div class="d-flex justify-content-center flex-wrap mt-1 w-100" v-if="estado == 'categorias'" id="categorias">
                 <button class=" btn-category " @click="mostrarProductos(indice)" v-for="(categoria,indice) of categoryStore.categories" :style= "'background-image: url('+categoria.image+')'" >{{
                     categoria.name }}</button>
                 <button class=" btn-category " v-if="categoryStore.categories.length % 2 == 1"><i class="bi bi-search"></i></button>
@@ -319,7 +319,7 @@ main {
 }
 
 #categorias{
-    margin: 0%;
+    margin: 0;
 }
 /* #venta {
     width: 100vw;

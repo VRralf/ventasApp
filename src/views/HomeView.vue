@@ -57,7 +57,7 @@ function atender(barra) {
       </div>
     </div>
   </nav>  -->
-  <div class="container py-5 h-100">
+  <div class="container d-flex justify-content-center h-100">
     <div class="d-flex justify-content-center flex-column p-3 gap-2" >
       <h2 style="text-align: center;">Selecciona la barra a atender</h2>
       <button @click="atender(barra)" class="btn  fw-bold mb-2 neon-button " v-for= "barra of barStore.bars" style=" padding: 20px 30px;">{{ barra.name }}</button>
@@ -73,7 +73,7 @@ function atender(barra) {
   min-width: 100vw;  
 } 
 .neon-button {  
- background-color: #391952;
+  background-color: #ffac00;
   color: aliceblue;
   border: none;
   padding: 10px 20px;
