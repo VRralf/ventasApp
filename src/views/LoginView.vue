@@ -25,7 +25,6 @@
 
                                 <button @click="login" class="btn btn-outline-light btn-lg px-5"
                                     type="submit">Login</button>
-
                             </div>
 
                         </div>
@@ -49,7 +48,7 @@ const password = ref('')
 
 
 function login() {
-    if(!usuario.value || !password.value){
+    if (!usuario.value || !password.value) {
         mostrarSweetAlert()
         return
     }
