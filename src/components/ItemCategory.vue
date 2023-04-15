@@ -13,8 +13,9 @@ const props = defineProps({
 .btn-category {
     background-color: #ecba92e7;
     height: 7rem;
-    margin: 1rem;
     border-radius: 8px;
     border: none;
+    font-weight: bolder;
+    font-size: x-large;
 }
 </style>
